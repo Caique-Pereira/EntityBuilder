@@ -1,0 +1,7 @@
+br\com\visualmix\entity\builder\AppInit.class
+br\com\visualmix\entity\builder\entity\EntityClass.class
+br\com\visualmix\entity\builder\entity\EntityRepositoryClass.class
+br\com\visualmix\entity\builder\process\CamelCaseFormatter.class
+br\com\visualmix\entity\builder\entity\Column.class
+br\com\visualmix\entity\builder\entity\EntityDtoClass.class
+br\com\visualmix\entity\builder\process\WriterClass.class
