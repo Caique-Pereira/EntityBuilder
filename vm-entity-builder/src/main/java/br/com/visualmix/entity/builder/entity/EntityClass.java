@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.visualmix.entity.builder.process.WriterClass;
+import br.com.visualmix.entity.builder.process.WriterDto;
+import br.com.visualmix.entity.builder.process.WriterRepository;
 import lombok.Data;
 
 
@@ -26,11 +28,14 @@ public class EntityClass {
 		Column column;
 		boolean isPrimaryKey;
 
+		
+		//cria uma lista com todas as colunas pk
 		while (primaryKeys.next()) {
 			primaryKeyList.add(primaryKeys.getString("COLUMN_NAME"));
 		}
 		
 
+		//cria uma lista com todas as colunas da tabela e suas respectivas informações
 		while (metaData.next()) {
 			column = new Column();
 
@@ -55,15 +60,22 @@ public class EntityClass {
 		String baseName = GenerateClassName(tableName);
 		this.className = baseName;
 		entityDto.setDtoClassName(baseName+"DTO");
+		entityRepository.setRepositoryName(baseName+"Repository");
 		ValidatePrimaryKey();
 		return this;
 
 	}
 
 	public void build() {		
-      WriterClass writerClass = new WriterClass();
-      writerClass.GenerateContent(this);
-      writerClass.WriteFile(this);
+      WriterClass writerClass = new WriterClass(this);
+      WriterDto  writerDto = new WriterDto(this);
+      WriterRepository writerRepo = new WriterRepository(this);
+      
+
+      writerClass.execute();
+      writerDto.execute();
+      writerRepo.execute();
+      
 	}
 	
 	private void ValidatePrimaryKey() {

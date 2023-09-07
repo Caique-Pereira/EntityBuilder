@@ -1,3 +1,5 @@
+br\com\visualmix\entity\builder\process\WriterDto.class
+br\com\visualmix\entity\builder\process\WriterRepository.class
 br\com\visualmix\entity\builder\AppInit.class
 br\com\visualmix\entity\builder\entity\EntityClass.class
 br\com\visualmix\entity\builder\entity\EntityRepositoryClass.class

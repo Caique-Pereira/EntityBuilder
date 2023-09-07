@@ -15,8 +15,17 @@ public class WriterClass {
 	String conteudoClass;
 	EntityClass clazz;
 	
-	public void GenerateContent(EntityClass entity) {
+	
+	public WriterClass(EntityClass entity){
 		this.clazz = entity;
+	}
+	
+	public void execute() {
+		GenerateContent();
+		WriteFile(clazz);
+	}
+	
+	public void GenerateContent() {
 		sb = new StringBuilder();
 		printImports();
 		printBody();
@@ -24,7 +33,6 @@ public class WriterClass {
 		conteudoClass = sb.toString();
 		
 	}
-	
 	
 	private void printImports() {
 		sb.append("package br.com.visualmix.databsp.base.model;\n");
@@ -40,6 +48,7 @@ public class WriterClass {
 		sb.append("import lombok.Data;\n");
 		sb.append("import lombok.EqualsAndHashCode;\n");
 		sb.append("import lombok.NoArgsConstructor;\n");
+		sb.append("import lombok.AllArgsConstructor;\n ");
 	}
 	
 	private void printBody() {
@@ -48,6 +57,7 @@ public class WriterClass {
 		sb.append("@Data\n");
 		sb.append("@Entity\n");
 		sb.append("@NoArgsConstructor\n");
+		sb.append("@AllArgsConstructor\n");
 		sb.append("@Table(name = \"" + clazz.getTableName() + "\", schema = \"vm_databsp.dbo\") \n");
 		if (clazz.isMultiplePrimaryKey())
 			sb.append("@IdClass(" + clazz.getClassName() + ".PrimaryKey.class)\n");
@@ -93,7 +103,7 @@ public class WriterClass {
 	}	
 	
 	  public void WriteFile(EntityClass clazz) {
-	        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop\\javaClasse\\entidade\\"+clazz.getClassName() + ".java"))) {
+	        try (BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\Estudos\\api\\vm-databsp-base\\src\\main\\java\\br\\com\\visualmix\\visualstore\\databsp\\base\\models\\"+clazz.getClassName() + ".java"))) {
 	            bw.write(conteudoClass);
 	            bw.close();
 	        } catch (IOException e) {

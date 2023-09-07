@@ -98,6 +98,10 @@ public class Column {
 		}
 	}
 	
+	public boolean isPrimaryKey() {
+		return primaryKey;
+	}
+	
 	
 
 	
